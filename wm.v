@@ -36,56 +36,67 @@ mut:
 	sec         bool       // Is the sec screen selected (or the first)
 }
 
-
 // Describes a keyboard shorcut : a key and a modifier, example: Super + T
 struct KeyMod {
 	key KeySym
 	mod int
 }
 
+// TODO
 type KeyCode = u8
 type KeySym = int
 
 fn grab_keys() {
-	// Define all keybindings in an array of structs
-	keybindings := [
-		terminal_key,
-		launch_app_key,
-		wifi_key,
-		screenshot_key,
-		bluetooth_key,
-		sound_up_key,
-		bright_up_key,
-		sound_down_key,
-		bright_down_key,
-		KeyMod{C.XK_1, mod_super},
-		KeyMod{C.XK_2, mod_super},
-		KeyMod{C.XK_3, mod_super},
-		KeyMod{C.XK_4, mod_super},
-		KeyMod{C.XK_5, mod_super},
-		KeyMod{C.XK_6, mod_super},
-		KeyMod{C.XK_7, mod_super},
-		KeyMod{C.XK_8, mod_super},
-		KeyMod{C.XK_9, mod_super},
-		KeyMod{C.XK_L, mod_super},
-		KeyMod{C.XK_H, mod_super},
-		KeyMod{C.XK_R, mod_super},
-		wm_quit_key,
-		close_key,
-		terminal_key,
-	]
-
-	// Loop over the keybindings and grab each one
-	for keybinding in keybindings {
-		C.XGrabKey(
-			dpy,
-			C.XKeysymToKeycode(dpy, keybinding.key),
-			keybinding.mod,
-			root,
-			true,
-			C.GrabModeAsync,
-			C.GrabModeAsync,
-		)
+	// Grab all the keyboard shortcuts used by the window manager, no one will be able to get these shortcuts (as far as I know)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, desktop_key.key), desktop_key.mod, root, true,
+		C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, launch_app_key.key), launch_app_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, wifi_key.key), wifi_key.mod, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, screenshot_key.key), screenshot_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, bluetooth_key.key), bluetooth_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, sound_up_key.key), sound_up_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, bright_up_key.key), bright_up_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, sound_down_key.key), sound_down_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, bright_down_key.key), bright_down_key.mod,
+		root, true, C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_1), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_2), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_3), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_4), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_5), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_6), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_7), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_8), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_9), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_L), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_H), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_R), mod_super, root, true, C.GrabModeAsync,
+		C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, wm_quit_key.key), wm_quit_key.mod, root, true,
+		C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, close_key.key), close_key.mod, root, true,
+		C.GrabModeAsync, C.GrabModeAsync)
+	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, terminal_key.key), terminal_key.mod, root,
+		true, C.GrabModeAsync, C.GrabModeAsync)
+}
 
 // Called when asked to close current window
 fn (wm WinMan) close_window() {
@@ -144,179 +155,7 @@ fn (mut wm WinMan) show_window() {
 	}
 }
 
-import os
-import time
-
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
-#flag -lX11
-
-// Masks used by X11
-const mod_super = C.Mod4Mask
-const mod_shift = C.ShiftMask
-
-// Catch these events
-const catched_events = i32(C.SubstructureNotifyMask | C.StructureNotifyMask | C.KeyPressMask | C.KeyReleaseMask | C.ButtonPressMask | C.ButtonReleaseMask)
-
-// Provides a root window and a display, as we don't need to change them, needed in a lot of function calls
-const dpy = C.XOpenDisplay(unsafe { nil })
-const root = C.XDefaultRootWindow(dpy)
-
-// Constants to manage the size of the different screens
-const screen = C.XScreenOfDisplay(dpy, 0)
-const sec_x = width
-const sec_y = 0
-const sec_w = C.XWidthOfScreen(screen) - width
-const sec_h = C.XHeightOfScreen(screen)
-
-// Configurations (keybindings and actions)
-const terminal_name = 'alacritty'
-const terminal_key = KeyMod{C.XK_Return, mod_super}
-const launch_app_key = KeyMod{C.XK_D, mod_super}
-const wifi_key = KeyMod{C.XK_N, mod_super}
-const screenshot_key = KeyMod{C.XK_G, mod_super}
-const bluetooth_key = KeyMod{C.XK_B, mod_super}
-const sound_up_key = KeyMod{C.XK_V, mod_super}
-const sound_down_key = KeyMod{C.XK_V, mod_super | mod_shift}
-const screenshot_name = 'ksnip -r'
-const sound_up_name = 'pamixer -i 5'
-const sound_down_name = 'pamixer -d 5'
-
-// Add any other keybindings you need here...
-
-// Struct for Window Manager and KeyMod
-struct WinMan {
-mut:
-	ev          C.XEvent
-	windows     []C.Window
-	stack_first []C.Window
-	stack_sec   []C.Window
-	order_first []C.Window
-	order_sec   []C.Window
-	sec         bool
-	i_first     int
-	i_sec       int
-}
-
-// Describes a keyboard shortcut: a key and a modifier
-struct KeyMod {
-	key KeySym
-	mod int
-}
-
-// Helper function to grab keys
-fn grab_keys() {
-	keybindings := [
-		terminal_key,
-		launch_app_key,
-		wifi_key,
-		screenshot_key,
-		bluetooth_key,
-		sound_up_key,
-		sound_down_key,
-		// Add other keybindings as necessary
-	]
-
-	for key in keybindings {
-		C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, key.key), key.mod, root, true, C.GrabModeAsync, C.GrabModeAsync)
-	}
-}
-
-// Handle specific actions when keys are pressed
-fn handle_key_action(key C.XKeyEvent) {
-	match key.keycode {
-		C.XKeysymToKeycode(dpy, terminal_key.key) if key.state == terminal_key.mod {
-			spawn os.execute(terminal_name)
-		}
-		C.XKeysymToKeycode(dpy, launch_app_key.key) if key.state == launch_app_key.mod {
-			spawn os.execute('rofi -show drun')
-		}
-		C.XKeysymToKeycode(dpy, wifi_key.key) if key.state == wifi_key.mod {
-			if os.execute('nmcli r wifi').output.contains('enabled') {
-				spawn os.execute('nmcli r wifi off')
-			} else {
-				spawn os.execute('nmcli r wifi on')
-			}
-		}
-		C.XKeysymToKeycode(dpy, screenshot_key.key) if key.state == screenshot_key.mod {
-			spawn os.execute(screenshot_name)
-		}
-		C.XKeysymToKeycode(dpy, sound_up_key.key) if key.state == sound_up_key.mod {
-			spawn os.execute(sound_up_name)
-		}
-		C.XKeysymToKeycode(dpy, sound_down_key.key) if key.state == sound_down_key.mod {
-			spawn os.execute(sound_down_name)
-		}
-		// Add more key-action mappings as necessary...
-		else {
-			// Optional: Handle unrecognized key presses or default actions
-		}
-	}
-}
-
-// Event handler for window manager
-fn main() {
-	mut wm := WinMan{}
-
-	// Set the error handler
-	C.XSetErrorHandler(error_handler)
-
-	// Set event mask
-	attr := C.XSetWindowAttributes{
-		event_mask: catched_events
-	}
-	C.XChangeWindowAttributes(dpy, C.XDefaultRootWindow(dpy), C.CWEventMask, &attr)
-
-	grab_keys()
-
-	// Main event loop
-	for {
-		C.XNextEvent(dpy, &wm.ev)
-		match unsafe { wm.ev.@type } {
-			C.KeyPress {
-				key := unsafe { wm.ev.xkey }
-				handle_key_action(key) // Handle the key action based on the key press
-			}
-			// Handle other events like ButtonPress, MapNotify, etc.
-			C.MapNotify {
-				// Handle window creation
-				if unsafe { !wm.ev.xmap.override_redirect } {
-					wm.windows << unsafe { wm.ev.xmap.window }
-					if wm.sec {
-						wm.stack_sec << wm.windows.last()
-						wm.order_sec << wm.windows.last()
-					} else {
-						wm.stack_first << wm.windows.last()
-						wm.order_first << wm.windows.last()
-					}
-				}
-			}
-			C.UnmapNotify {
-				// Handle window removal
-				win := unsafe { wm.ev.xunmap.window }
-				unmapped_i := wm.windows.index(win)
-				if unmapped_i != -1 {
-					wm.windows.delete(unmapped_i)
-					if win in wm.order_sec {
-						wm.order_sec.delete(wm.order_sec.index(win))
-						wm.stack_sec.delete(wm.stack_sec.index(win))
-					} else {
-						wm.order_first.delete(wm.order_first.index(win))
-						wm.stack_first.delete(wm.stack_first.index(win))
-					}
-				}
-			}
-			else {
-				time.sleep(30 * time.millisecond)
-			}
-		}
-	}
-
-	// Reset the error handler
-	C.XSetErrorHandler(unsafe { nil })
-}
-
-// Simple error handler for X11
+// avoid crashes as X will redirect errors here instead of shutting down
 fn error_handler(display &C.Display, event &C.XErrorEvent) int {
 	error_message := []u8{len: 256}
 	C.XGetErrorText(display, event.error_code, error_message.data, error_message.len)
@@ -425,17 +264,13 @@ fn main() {
 					&& key.state == terminal_key.mod {
 					spawn os.execute(terminal_name)
 				}
-				if key.keycode == C.XKeysymToKeycode(dpy, close_key.key)
-					&& key.state == close_key.mod {
-					wm.close_window()
-				}
-				if key.keycode == C.XKeysymToKeycode(dpy, browser_key.key)
-					&& key.state == browser_key.mod {
-					spawn os.execute(browser_name)
-				}
 				if key.keycode == C.XKeysymToKeycode(dpy, editor_key.key)
 					&& key.state == editor_key.mod {
 					spawn os.execute(editor_name)
+				}
+				if key.keycode == C.XKeysymToKeycode(dpy, close_key.key)
+					&& key.state == close_key.mod {
+					wm.close_window()
 				}
 				if key.keycode == C.XKeysymToKeycode(dpy, wm_quit_key.key)
 					&& key.state == wm_quit_key.mod {
@@ -613,6 +448,4 @@ fn main() {
 		}
 	}
 	C.XSetErrorHandler(unsafe { nil })
-}
-	}
 }
