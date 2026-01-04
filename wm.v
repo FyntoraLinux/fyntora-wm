@@ -264,10 +264,10 @@ fn main() {
 					&& key.state == terminal_key.mod {
 					spawn os.execute(terminal_name)
 				}
-				if key.keycode == C.XKeysymToKeycode(dpy, editor_key.key)
-					&& key.state == editor_key.mod {
-					spawn os.execute(editor_name)
-				}
+				// if key.keycode == C.XKeysymToKeycode(dpy, editor_key.key)
+				// 	&& key.state == editor_key.mod {
+				// 	spawn os.execute(editor_name)
+				// }
 				if key.keycode == C.XKeysymToKeycode(dpy, close_key.key)
 					&& key.state == close_key.mod {
 					wm.close_window()
