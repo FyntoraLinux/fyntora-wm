@@ -315,22 +315,6 @@ fn main() {
 					&& key.state == sound_down_key.mod {
 					spawn os.execute(sound_down_name)
 				}
-				if key.keycode == C.XKeysymToKeycode(dpy, bright_up_key.key)
-					&& key.state == bright_up_key.mod {
-					spawn os.execute(bright_up_name)
-				}
-				if key.keycode == C.XKeysymToKeycode(dpy, bright_down_key.key)
-					&& key.state == bright_down_key.mod {
-					spawn os.execute(bright_down_name)
-				}
-				if key.keycode == C.XKeysymToKeycode(dpy, bluetooth_key.key)
-					&& key.state == bluetooth_key.mod {
-					if os.execute("bluetoothctl show | awk 'NR==7 {printf $2}'").output.contains('no') {
-						spawn os.execute(bluetooth_name + ' on')
-					} else {
-						spawn os.execute(bluetooth_name + ' off')
-					}
-				}
 				if key.keycode == C.XKeysymToKeycode(dpy, C.XK_L) && key.state == mod_super { // cycle forward
 					if wm.sec {
 						if wm.order_sec.len > 0 {
