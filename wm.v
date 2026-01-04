@@ -276,13 +276,7 @@ fn main() {
 					&& key.state == wm_quit_key.mod {
 					break
 				}
-				if key.keycode == C.XKeysymToKeycode(dpy, wifi_key.key) && key.state == wifi_key.mod {
-					if os.execute('nmcli r wifi').output.contains('enabled') {
-						spawn os.execute(wifi_name + ' off')
-					} else {
-						spawn os.execute(wifi_name + ' on')
-					}
-				}
+
 				if key.keycode == C.XKeysymToKeycode(dpy, desktop_key.key)
 					&& key.state == desktop_key.mod {
 					wm.sec = !wm.sec // change of screen
