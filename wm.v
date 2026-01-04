@@ -60,12 +60,6 @@ fn grab_keys() {
 		true, C.GrabModeAsync, C.GrabModeAsync)
 	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, sound_up_key.key), sound_up_key.mod, root,
 		true, C.GrabModeAsync, C.GrabModeAsync)
-	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, bright_up_key.key), bright_up_key.mod, root,
-		true, C.GrabModeAsync, C.GrabModeAsync)
-	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, sound_down_key.key), sound_down_key.mod, root,
-		true, C.GrabModeAsync, C.GrabModeAsync)
-	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, bright_down_key.key), bright_down_key.mod,
-		root, true, C.GrabModeAsync, C.GrabModeAsync)
 	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_1), mod_super, root, true, C.GrabModeAsync,
 		C.GrabModeAsync)
 	C.XGrabKey(dpy, C.XKeysymToKeycode(dpy, C.XK_2), mod_super, root, true, C.GrabModeAsync,
