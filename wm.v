@@ -614,3 +614,5 @@ fn main() {
 	}
 	C.XSetErrorHandler(unsafe { nil })
 }
+	}
+}
